@@ -1,0 +1,38 @@
+﻿@model WebApplication6.Models.User
+
+@{
+    ViewData["Title"] = "Login";
+    ViewData["BodyClass"] = "login-background";
+}
+
+<div class="d-flex justify-content-center align-items-center vh-100 custom-login-container">
+    <div class="col-md-6 col-lg-5 login-form">
+        <div class="card shadow-lg">
+            <div class="card-header text-center">
+                <img src="~/images/iett-logo.png" alt="İett Logo" class="img-fluid" style="max-height: 192px;">
+            </div>
+            <div class="card-body">
+                <form asp-action="Login" method="post">
+                    <div class="form-group">
+                        <label for="Username">Kullanıcı Adı</label>
+                        <input type="text" class="form-control" id="Username" name="Username" required />
+                    </div>
+                    <div class="form-group mt-4">
+                        <label for="Password">Şifre</label>
+                        <input type="password" class="form-control" id="Password" name="Password" required />
+                    </div>
+                    <div class="d-flex justify-content-between mt-4">
+                        <button type="submit" class="btn btn-primary w-100">Giriş Yap</button>
+                    </div>
+                </form>
+                @if (ViewBag.Message != null)
+                {
+                    <div class="alert alert-danger mt-3">
+                        @ViewBag.Message
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</div>
+

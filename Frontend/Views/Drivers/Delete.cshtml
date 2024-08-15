@@ -1,0 +1,22 @@
+﻿@model WebApplication6.Models.Driver
+
+@{
+    ViewData["Title"] = "Sürücü Sil";
+}
+
+<div class="container mt-5">
+    <h1 class="text-center">Sürücü Sil</h1>
+    <div class="card">
+        <div class="card-body">
+            <h5 class="card-title">ID: @Model.Id</h5>
+            <h5 class="card-title">Ad: @Model.Name</h5>
+            <h5 class="card-title">Soyad: @Model.Surname</h5>
+            <h5 class="card-title">Yaş: @Model.Age</h5>
+            <form asp-action="Delete" method="post">
+                <div class="d-flex justify-content-between mt-4">
+                    <button type="submit" class="btn btn-danger">Sil</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

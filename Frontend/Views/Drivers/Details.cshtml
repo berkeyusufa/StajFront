@@ -1,0 +1,17 @@
+﻿@model WebApplication6.Models.Driver
+
+@{
+    ViewData["Title"] = "Sürücü Detayları";
+}
+
+<div class="container mt-5">
+    <h1 class="text-center">Sürücü Detayları</h1>
+    <div class="card">
+        <div class="card-body">
+            <h5 class="card-title">ID: @Model.Id</h5>
+            <h5 class="card-title">Ad: @Model.Name</h5>
+            <h5 class="card-title">Soyad: @Model.Surname</h5>
+            <h5 class="card-title">Yaş: @Model.Age</h5>
+        </div>
+    </div>
+</div>

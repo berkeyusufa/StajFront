@@ -1,0 +1,259 @@
+﻿@using Microsoft.AspNetCore.Http
+@inject IHttpContextAccessor HttpContextAccessor
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - WebApplication6</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" />
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/WebApplication6.styles.css" asp-append-version="true" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" />
+    <style>
+        body {
+            font-family: 'Montserrat', sans-serif;
+        }
+
+        .left-menu {
+            font-family: 'Montserrat', sans-serif;
+            font-size: .9375rem;
+            font-weight: 100;
+            line-height: 1.5;
+            background: #2d373c;
+            width: 300px; /* Genişliği artırıldı */
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            left: 0;
+        }
+
+        .menu-accordion {
+            font-size: .9375rem;
+            padding: 1rem;
+            color: #ffffffd1;
+        }
+
+            .menu-accordion .menu-section {
+                margin-bottom: 1rem;
+                width: 100%;
+            }
+
+                .menu-accordion .menu-section input[type='radio'] {
+                    display: none;
+                }
+
+                    .menu-accordion .menu-section input[type='radio']:checked + label {
+                        background: #1f282d;
+                        color: #2fa3e6;
+                    }
+
+                        .menu-accordion .menu-section input[type='radio']:checked + label i {
+                            color: #2fa3e6;
+                        }
+
+                .menu-accordion .menu-section label {
+                    position: relative;
+                    cursor: pointer;
+                    padding: 10px 20px;
+                    display: table;
+                    background: #2d373c;
+                    width: 100%;
+                    transition: background 0.3s ease-in-out;
+                    user-select: none;
+                }
+
+                    .menu-accordion .menu-section label:before {
+                        content: " ";
+                        width: 100%;
+                        position: absolute;
+                        left: 0;
+                        top: 0;
+                        height: 1px;
+                        border-top: 1px solid #1f282d;
+                    }
+
+                    .menu-accordion .menu-section label:hover {
+                        background: #1f282d;
+                    }
+
+                    .menu-accordion .menu-section label span {
+                        vertical-align: middle;
+                        font-weight: 400;
+                    }
+
+                    .menu-accordion .menu-section label i {
+                        padding-right: 15px;
+                        color: #ffffff82;
+                    }
+
+        .menu-subsection {
+            display: none;
+        }
+
+        .menu-section input[type='radio']:checked ~ .menu-subsection {
+            display: block;
+            padding-left: 20px;
+        }
+
+        .menu-subsection-link {
+            display: block;
+            padding: 5px 20px;
+            color: #ffffffd1;
+            text-decoration: none;
+        }
+
+            .menu-subsection-link:hover {
+                background: #1f282d;
+            }
+
+        .main-content {
+            margin-left: 320px; /* Sidebar genişliği kadar boşluk bırakıldı */
+            padding: 20px;
+        }
+
+        .navbar-custom {
+            background-color: #f44336;
+            color: white;
+            font-family: 'Montserrat', sans-serif;
+        }
+
+            .navbar-custom .navbar-nav .nav-link {
+                color: white;
+                font-family: 'Montserrat', sans-serif;
+            }
+
+            .navbar-custom .navbar-toggler {
+                color: white;
+                border-color: white;
+            }
+
+            .navbar-custom .dropdown-menu {
+                background-color: #f44336;
+                color: white;
+            }
+
+                .navbar-custom .dropdown-menu .dropdown-item {
+                    color: white;
+                    font-family: 'Montserrat', sans-serif;
+                }
+
+                    .navbar-custom .dropdown-menu .dropdown-item:hover {
+                        background-color: #d32f2f;
+                        color: white;
+                    }
+
+        .footer {
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+            background-color: #f5f5f5;
+            padding: 10px 0;
+            color: #f5f5f5;
+        }
+
+            .footer a {
+                color: #f5f5f5;
+            }
+
+        .home-icon {
+            font-size: 1.5rem;
+            color: white;
+        }
+
+            .home-icon:hover {
+                color: #ddd;
+            }
+    </style>
+</head>
+<body class="@ViewData["BodyClass"]">
+    @if (HttpContextAccessor.HttpContext != null && HttpContextAccessor.HttpContext.Session.GetString("Username") != null)
+    {
+        <div class="left-menu">
+            <div class="logo">
+                <img src="https://alliedportal.staging.wpengine.com/wp-content/uploads/2018/04/Allied-Horizontal-Black-Logo-e1524773303502.png">
+                <div>ACCESS</div>
+            </div>
+            <div class="menu-accordion">
+                <div class="menu-section">
+                    <input type="radio" name="menu-accordion-1" id="menu-section-1" value="toggle" />
+                    <label for="menu-section-1"><i class="fa fa-car"></i><span>Sürücüler</span></label>
+                    <div class="menu-subsection">
+                        <a href="@Url.Action("Index", "Drivers")" class="menu-subsection-link"><i class="fa fa-list"></i> Sürücü Listesi</a>
+                        <a href="@Url.Action("Create", "Drivers")" class="menu-subsection-link"><i class="fa fa-plus"></i> Sürücü Ekle</a>
+                    </div>
+                </div>
+                <div class="menu-section">
+                    <input type="radio" name="menu-accordion-1" id="menu-section-2" value="toggle" />
+                    <label for="menu-section-2"><i class="fa fa-bus"></i><span>Otobüsler</span></label>
+                    <div class="menu-subsection">
+                        <a href="@Url.Action("Index", "Bus")" class="menu-subsection-link"><i class="fa fa-list"></i> Otobüs Listesi</a>
+                        <a href="@Url.Action("Create", "Bus")" class="menu-subsection-link"><i class="fa fa-plus"></i> Otobüs Ekle</a>
+                    </div>
+                </div>
+                <div class="menu-section">
+                    <input type="radio" name="menu-accordion-1" id="menu-section-3" value="toggle" />
+                    <label for="menu-section-3"><i class="fa fa-tasks"></i><span>Görev Atama</span></label>
+                    <div class="menu-subsection">
+                        <a href="@Url.Action("AssignTask", "Task")" class="menu-subsection-link"><i class="fa fa-plus"></i> Görev Atama</a>
+                    </div>
+                </div>
+                <div class="menu-section">
+                    <input type="radio" name="menu-accordion-1" id="menu-section-4" value="toggle" />
+                    <label for="menu-section-4"> <i class="fa fa-group"></i><span>Sorular</span></label>
+                </div>
+            </div>
+        </div>
+    }
+    <header>
+        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-custom border-bottom box-shadow mb-3">
+            <div class="container-fluid">
+                <a class="navbar-brand" href="@Url.Action("Index", "Drivers")"><i class="fas fa-home home-icon"></i></a>
+                <span class="navbar-text ml-2 text-white">İett Akıllı Ulaşım Sistemleri</span>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+                        aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
+                    <ul class="navbar-nav flex-grow-1">
+                        <!-- Sol tarafta diğer linkler olabilir -->
+                    </ul>
+                    <ul class="navbar-nav">
+                        @if (HttpContextAccessor.HttpContext != null && HttpContextAccessor.HttpContext.Session.GetString("Username") != null)
+                        {
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                    Hesap
+                                </a>
+                                <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+                                    <li><a class="dropdown-item" asp-controller="Account" asp-action="ChangePassword">Parolamı Değiştir</a></li>
+                                    <li><hr class="dropdown-divider"></li>
+                                    <li><a class="dropdown-item" asp-controller="Account" asp-action="Logout">Çıkış Yap</a></li>
+                                </ul>
+                            </li>
+                        }
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+    <div class="container main-content @ViewData["MainContentClass"]">
+        <main role="main" class="pb-3">
+            @RenderBody()
+        </main>
+    </div>
+
+    <footer class="footer text-muted">
+        <div class="container">
+            &copy; 2024 - İett Akıllı Ulaşım Sistemleri
+        </div>
+    </footer>
+
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>
